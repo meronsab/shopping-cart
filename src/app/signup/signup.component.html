@@ -1,0 +1,41 @@
+<p>signup works!</p>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Email:</label>
+    <input formControlName="email" type="email" />
+    <div
+      *ngIf="
+        signupForm.get('email')?.invalid && signupForm.get('email')?.touched
+      "
+    >
+      Invalid email
+    </div>
+  </div>
+
+  <div>
+    <label>Password:</label>
+    <input formControlName="password" type="password" />
+    <div *ngIf="signupForm.get('password')?.errors?.['minlength']">
+      Password must be at least 6 characters
+    </div>
+    <div *ngIf="signupForm.get('password')?.errors?.['pattern']">
+      Password must contain at least one uppercase letter
+    </div>
+  </div>
+
+  <div>
+    <label>Confirm Password:</label>
+    <input formControlName="confirmPassword" type="password" />
+    <div *ngIf="signupForm.errors?.['notMatching']">Passwords do not match</div>
+  </div>
+
+  <div *ngIf="errorMessage" style="color: red">{{ errorMessage }}</div>
+
+  <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+</form>
+<!-- Link to login page -->
+<p>
+  Already have an account?
+  <button type="button" (click)="goToLogin()">Log in here</button>
+</p>
+

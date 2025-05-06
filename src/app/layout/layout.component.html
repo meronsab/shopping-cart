@@ -1,0 +1,10 @@
+<header style="display: flex; justify-content: space-between; padding: 10px; background-color: #eee;">
+  <div>
+    <button routerLink="/products">🛍️ Products</button>
+    <button routerLink="/cart">🛒 Cart</button>
+  </div>
+
+  <button (click)="logout()">🚪 Logout</button>
+</header>
+
+<router-outlet></router-outlet>
