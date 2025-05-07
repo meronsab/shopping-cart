@@ -19,7 +19,6 @@ const routes: Routes = [
       { path: 'cart', component: CartComponent },
     ],
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

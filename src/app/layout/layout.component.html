@@ -1,10 +1,25 @@
-<header style="display: flex; justify-content: space-between; padding: 10px; background-color: #eee;">
+<!-- Top navigation bar with links and logout -->
+<header
+  style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #eee;
+  "
+>
   <div>
+    <!-- Navigation buttons -->
     <button routerLink="/products">🛍️ Products</button>
     <button routerLink="/cart">🛒 Cart</button>
   </div>
 
-  <button (click)="logout()">🚪 Logout</button>
+  <!-- Username display and logout -->
+  <div style="display: flex; align-items: center; gap: 10px">
+    <span>👤 {{ username }}</span>
+    <button (click)="logout()">🚪 Logout</button>
+  </div>
 </header>
 
+<!-- Placeholder for child components -->
 <router-outlet></router-outlet>

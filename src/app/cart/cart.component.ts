@@ -19,11 +19,6 @@ export class CartComponent implements OnInit {
 
   // Load cart from localStorage
   loadCart(): void {
-    if (!this.currentUser.email) {
-      alert('No user logged in.');
-      return;
-    }
-
     const cartKey = `cart_${this.currentUser.email}`;
     this.cartItems = JSON.parse(localStorage.getItem(cartKey) || '[]');
     this.total = this.cartItems.reduce((sum, item) => sum + item.price, 0);

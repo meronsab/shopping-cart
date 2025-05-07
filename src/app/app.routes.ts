@@ -1,22 +1,40 @@
 import { Routes } from '@angular/router';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
-import { LayoutComponent } from './layout/layout.component';
-import { ProductsComponent } from './products/products.component';
-import { CartComponent } from './cart/cart.component';
 import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
-  { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'signup',
+    loadComponent: () =>
+      import('./signup/signup.component').then((m) => m.SignupComponent),
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./login/login.component').then((m) => m.LoginComponent),
+  },
   {
     path: '',
-    component: LayoutComponent,
+    loadComponent: () =>
+      import('./layout/layout.component').then((m) => m.LayoutComponent),
     canActivate: [AuthGuard],
     children: [
-      { path: 'products', component: ProductsComponent },
-      { path: 'cart', component: CartComponent },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./products/products.component').then(
+            (m) => m.ProductsComponent
+          ),
+      },
+      {
+        path: 'cart',
+        loadComponent: () =>
+          import('./cart/cart.component').then((m) => m.CartComponent),
+      },
     ],
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
 ];

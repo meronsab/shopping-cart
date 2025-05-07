@@ -9,9 +9,18 @@ import { RouterOutlet, RouterModule, Router } from '@angular/router';
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent {
-  constructor(private router: Router) {}
+  username: string = '';
 
-  // Clear user data and redirect to login
+  constructor(private router: Router) {
+    // Retrieve the logged-in user from localStorage
+    const userJson = localStorage.getItem('currentUser');
+    if (userJson) {
+      const email = JSON.parse(userJson).email;
+      this.username = email.split('@')[0]; // Get the part before '@'
+    }
+  }
+
+  // Clear user data and navigate to login page
   logout(): void {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);

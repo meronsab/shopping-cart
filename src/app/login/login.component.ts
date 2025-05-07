@@ -16,19 +16,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string = '';
+  errorMessage = '';
 
   constructor(private fb: FormBuilder, private router: Router) {
-    // Initialize the login form with validators
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
 
-  // Handle login form submission
   onSubmit() {
-    if (this.loginForm.invalid) return;
+    if (!this.loginForm.valid) return;
 
     const { email, password } = this.loginForm.value;
     const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -43,11 +41,9 @@ export class LoginComponent {
     }
 
     localStorage.setItem('currentUser', JSON.stringify(user));
-    alert('Login successful!');
     this.router.navigate(['/products']);
   }
 
-  // Navigate to signup page
   goToSignup() {
     this.router.navigate(['/signup']);
   }
